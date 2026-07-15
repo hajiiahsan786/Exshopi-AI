@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.api.v1.endpoints import (
+    agent,
     auth,
     users,
     organizations,
@@ -113,7 +114,15 @@ api_router.include_router(
     tags=["Permissions"],
 )
 
+
+api_router.include_router(
+    agent.router,
+    prefix="/agents",
+    tags=["Agents"],
+)
+
 for router, prefix, tags in inventory.INVENTORY_ROUTERS:
+
     api_router.include_router(
         router,
         prefix=prefix,
