@@ -5,7 +5,7 @@ from decimal import Decimal
 from typing import Any
 
 from fastapi import HTTPException, status
-from sqlalchemy import func, or_
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.models.company import Company
@@ -22,8 +22,6 @@ from app.models.finance import (
     ChartOfAccount,
     CostCenter,
     Currency,
-    CustomerCreditNote,
-    DebitNote,
     DepreciationEntry,
     ExchangeRate,
     Expense,
@@ -34,14 +32,11 @@ from app.models.finance import (
     GeneralLedger,
     JournalEntry,
     JournalEntryLine,
-    PaymentAllocation,
-    PaymentSchedule,
     PaymentTerm,
     RecurringJournal,
     TaxGroup,
     TaxRate,
     VendorBill,
-    VendorCreditNote,
 )
 from app.models.inventory import Supplier
 from app.models.organization import Organization
@@ -54,7 +49,6 @@ from app.repositories.finance_repository import (
     AuditLogRepository,
     BankAccountRepository,
     BankTransactionRepository,
-    BudgetLineRepository,
     BudgetRepository,
     ChartOfAccountRepository,
     CostCenterRepository,
