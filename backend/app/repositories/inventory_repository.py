@@ -1,4 +1,4 @@
-from typing import Any, Generic, TypeVar
+from typing import Any, Generic, TypeVar, List
 
 from sqlalchemy import String, asc, cast, desc, func, or_
 from sqlalchemy.orm import Query, Session
@@ -114,7 +114,7 @@ class InventoryRepository(CRMRepository[ModelT], Generic[ModelT]):
         sort_by: str = "created_at",
         sort_order: str = "desc",
         include_deleted: bool = False,
-    ) -> tuple[list[ModelT], int]:
+    ) -> tuple[List[ModelT], int]:
         query = cls.base_query(db, include_deleted)
         query = cls._apply_filters(query, filters)
 
@@ -141,17 +141,17 @@ class InventoryRepository(CRMRepository[ModelT], Generic[ModelT]):
         return query.all(), total
 
     @classmethod
-    def bulk_get(cls, db: Session, ids: list[int], include_deleted: bool = False) -> list[ModelT]:
+    def bulk_get(cls, db: Session, ids: List[int], include_deleted: bool = False) -> List[ModelT]:
         return cls.base_query(db, include_deleted).filter(cls.model.id.in_(ids)).all()
 
     @classmethod
     def bulk_update(
         cls,
         db: Session,
-        items: list[ModelT],
+        items: List[ModelT],
         values: dict[str, Any],
         user_id: int | None = None,
-    ) -> list[ModelT]:
+    ) -> List[ModelT]:
         for item in items:
             for key, value in values.items():
                 if hasattr(item, key):
@@ -203,7 +203,7 @@ class ProductRepository(InventoryRepository[Product]):
         sort_by: str = "created_at",
         sort_order: str = "desc",
         include_deleted: bool = False,
-    ) -> tuple[list[Product], int]:
+    ) -> tuple[List[Product], int]:
         query = cls.base_query(db, include_deleted)
         query = cls._apply_filters(query, filters)
 
@@ -282,7 +282,7 @@ class InventoryItemRepository(InventoryRepository[Inventory]):
         sort_by: str = "created_at",
         sort_order: str = "desc",
         include_deleted: bool = False,
-    ) -> tuple[list[Inventory], int]:
+    ) -> tuple[List[Inventory], int]:
         del tags
         query = cls.base_query(db, include_deleted)
         query = cls._apply_filters(query, filters)
