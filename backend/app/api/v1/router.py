@@ -147,10 +147,9 @@ for router, prefix, tags in finance.FINANCE_ROUTERS:
         tags=tags,
     )
 
-# Projects
-for router, prefix, tags in projects.PROJECTS_ROUTERS:
-    api_router.include_router(
-        router,
-        prefix=prefix,
-        tags=tags,
-    )
+# Workflows
+from app.api.v1.endpoints import workflows
+api_router.include_router(
+    workflows.router,
+    prefix="/workflows",
+)
