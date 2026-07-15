@@ -2,6 +2,7 @@ from app.api.v1.endpoints.document import router as document_router
 from fastapi import APIRouter
 
 from app.api.v1.endpoints import (
+    projects,
     auth,
     users,
     organizations,
@@ -136,7 +137,8 @@ for router, prefix, tags in finance.FINANCE_ROUTERS:
         tags=tags,
     )
 
-for router, prefix, tags in marketing.MARKETING_ROUTERS:
+# Projects
+for router, prefix, tags in projects.PROJECTS_ROUTERS:
     api_router.include_router(
         router,
         prefix=prefix,
