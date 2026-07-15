@@ -133,3 +133,10 @@ for router, prefix, tags in finance.FINANCE_ROUTERS:
         prefix=prefix,
         tags=tags,
     )
+
+# Workflows
+from app.api.v1.endpoints import workflows
+api_router.include_router(
+    workflows.router,
+    prefix="/workflows",
+)
