@@ -1,3 +1,4 @@
+from app.api.v1.endpoints.document import router as document_router
 from fastapi import APIRouter
 
 from app.api.v1.endpoints import (
@@ -133,3 +134,5 @@ for router, prefix, tags in finance.FINANCE_ROUTERS:
         prefix=prefix,
         tags=tags,
     )
+
+api_router.include_router(document_router, prefix="/documents", tags=["documents"])
