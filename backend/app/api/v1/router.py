@@ -1,3 +1,4 @@
+from app.api.v1.endpoints.document import router as document_router
 from fastapi import APIRouter
 
 from app.api.v1.endpoints import (
@@ -19,6 +20,7 @@ from app.api.v1.endpoints import (
     inventory,
     sales,
     finance,
+    marketing,
 )
 
 api_router = APIRouter()
