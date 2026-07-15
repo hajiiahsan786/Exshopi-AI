@@ -1,6 +1,6 @@
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any, Generic, TypeVar
+from typing import Any, Generic, TypeVar, List
 
 from sqlalchemy import asc, desc, func, or_
 from sqlalchemy.orm import Query, Session
@@ -192,7 +192,7 @@ class FinanceRepository(CRMRepository[ModelT], Generic[ModelT]):
         sort_by: str = "created_at",
         sort_order: str = "desc",
         include_deleted: bool = False,
-    ) -> tuple[list[ModelT], int]:
+    ) -> tuple[List[ModelT], int]:
         del tags
         query = cls.base_query(db, include_deleted)
         query = cls._apply_filters(query, filters)
@@ -217,7 +217,7 @@ class FinanceRepository(CRMRepository[ModelT], Generic[ModelT]):
         return query.all(), total
 
     @classmethod
-    def bulk_get(cls, db: Session, ids: list[int], include_deleted: bool = False) -> list[ModelT]:
+    def bulk_get(cls, db: Session, ids: List[int], include_deleted: bool = False) -> List[ModelT]:
         return cls.base_query(db, include_deleted).filter(cls.model.id.in_(ids)).all()
 
 

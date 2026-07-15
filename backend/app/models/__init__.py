@@ -1,5 +1,29 @@
 from .user import User
 from .company import Company
+from .procurement import (
+    SupplierCategory,
+    SupplierContact,
+    SupplierAddress,
+    SupplierBankingInfo,
+    SupplierDocument,
+    SupplierRating,
+    SupplierPerformance,
+    PurchaseRequest,
+    PurchaseRequestItem,
+    PurchaseRequestApproval,
+    RFQ,
+    RFQItem,
+    RFQSupplier,
+    RFQResponseItem,
+    PurchaseOrder,
+    PurchaseOrderItem,
+    PurchaseOrderApproval,
+    GoodsReceiptNote,
+    GoodsReceiptItem,
+    PurchaseReturn,
+    PurchaseReturnItem,
+    SupplierPayment,
+)
 from .organization import Organization
 from .department import Department
 from .employee import Employee
@@ -224,6 +248,28 @@ __all__ = [
     "Role",
     "Permission",
     "AuthToken",
+    "SupplierCategory",
+    "SupplierContact",
+    "SupplierAddress",
+    "SupplierBankingInfo",
+    "SupplierDocument",
+    "SupplierRating",
+    "SupplierPerformance",
+    "PurchaseRequest",
+    "PurchaseRequestItem",
+    "PurchaseRequestApproval",
+    "RFQ",
+    "RFQItem",
+    "RFQSupplier",
+    "RFQResponseItem",
+    "PurchaseOrder",
+    "PurchaseOrderItem",
+    "PurchaseOrderApproval",
+    "GoodsReceiptNote",
+    "GoodsReceiptItem",
+    "PurchaseReturn",
+    "PurchaseReturnItem",
+    "SupplierPayment",
 ]
 
 from .marketing import (

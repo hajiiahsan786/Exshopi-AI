@@ -4,7 +4,7 @@ import re
 import zipfile
 from datetime import datetime, timezone
 from decimal import Decimal
-from typing import Any
+from typing import Any, List
 from uuid import uuid4
 from xml.sax.saxutils import escape
 
@@ -78,7 +78,7 @@ def column_name(index: int) -> str:
     return name
 
 
-def build_xlsx(rows: list[dict[str, Any]], fields: tuple[str, ...]) -> bytes:
+def build_xlsx(rows: List[dict[str, Any]], fields: tuple[str, ...]) -> bytes:
     sheet_rows = [list(fields)]
     sheet_rows.extend([[serialize_export_value(row.get(field)) for field in fields] for row in rows])
     cells = []
@@ -195,21 +195,21 @@ class BaseInventoryService:
         return {"deleted": item_id}
 
     @classmethod
-    def bulk_delete(cls, db: Session, ids: list[int], user_id: int | None = None) -> dict[str, Any]:
+    def bulk_delete(cls, db: Session, ids: List[int], user_id: int | None = None) -> dict[str, Any]:
         items = cls.repository.bulk_get(db, ids)
         for item in items:
             cls.repository.soft_delete(db, item, user_id)
         return {"affected": len(items), "ids": [item.id for item in items]}
 
     @classmethod
-    def bulk_restore(cls, db: Session, ids: list[int], user_id: int | None = None) -> dict[str, Any]:
+    def bulk_restore(cls, db: Session, ids: List[int], user_id: int | None = None) -> dict[str, Any]:
         items = cls.repository.bulk_get(db, ids, include_deleted=True)
         for item in items:
             cls.repository.restore(db, item, user_id)
         return {"affected": len(items), "ids": [item.id for item in items]}
 
     @classmethod
-    def bulk_update(cls, db: Session, ids: list[int], values: dict[str, Any], user_id: int | None = None) -> dict[str, Any]:
+    def bulk_update(cls, db: Session, ids: List[int], values: dict[str, Any], user_id: int | None = None) -> dict[str, Any]:
         items = cls.repository.bulk_get(db, ids)
         allowed_values = {key: value for key, value in values.items() if hasattr(cls.repository.model, key)}
         for item in items:
@@ -217,7 +217,7 @@ class BaseInventoryService:
         return {"affected": len(items), "ids": [item.id for item in items]}
 
     @classmethod
-    def bulk_status(cls, db: Session, ids: list[int], new_status: str, user_id: int | None = None) -> dict[str, Any]:
+    def bulk_status(cls, db: Session, ids: List[int], new_status: str, user_id: int | None = None) -> dict[str, Any]:
         return cls.bulk_update(db, ids, {"status": new_status}, user_id)
 
     @classmethod
