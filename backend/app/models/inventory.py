@@ -50,8 +50,17 @@ class Supplier(UUIDMixin, AuditMixin, Base):
     payment_terms = Column(String(255))
     tax_number = Column(String(100), index=True)
     status = Column(String(50), nullable=False, default="active", index=True)
+    category_id = Column(Integer, ForeignKey("supplier_categories.id"), nullable=True, index=True)
+    is_preferred = Column(Boolean, nullable=False, default=False)
 
     products = relationship("Product", back_populates="supplier")
+    category = relationship("SupplierCategory", back_populates="suppliers")
+    contacts = relationship("SupplierContact", back_populates="supplier")
+    addresses = relationship("SupplierAddress", back_populates="supplier")
+    banking_info = relationship("SupplierBankingInfo", back_populates="supplier")
+    documents = relationship("SupplierDocument", back_populates="supplier")
+    ratings = relationship("SupplierRating", back_populates="supplier")
+    performance_records = relationship("SupplierPerformance", back_populates="supplier")
 
 
 class Warehouse(UUIDMixin, AuditMixin, Base):
