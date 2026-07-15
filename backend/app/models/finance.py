@@ -887,4 +887,4 @@ class AuditLog(UUIDMixin, AuditMixin, Base):
     occurred_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now(), index=True)
 
     organization = relationship("Organization")
-    user = relationship("User")
+    user = relationship("User", foreign_keys=[user_id])
