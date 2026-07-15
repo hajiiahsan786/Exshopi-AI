@@ -18,6 +18,7 @@ from app.api.v1.endpoints import (
     inventory,
     sales,
     finance,
+    ai,
 )
 
 api_router = APIRouter()
@@ -133,3 +134,10 @@ for router, prefix, tags in finance.FINANCE_ROUTERS:
         prefix=prefix,
         tags=tags,
     )
+
+# AI
+api_router.include_router(
+    ai.router,
+    prefix="/ai",
+    tags=["AI"],
+)

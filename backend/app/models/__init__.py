@@ -83,6 +83,33 @@ from .role import Role
 from .permission import Permission
 from .auth_token import AuthToken
 
+from .ai import (
+    AIProvider,
+    AIModel,
+    AIConversation,
+    AIConversationMessage,
+    AIAgent,
+    AIAgentConfiguration,
+    AIAgentMemory,
+    AIKnowledgeBase,
+    AIKnowledgeDocument,
+    AIEmbedding,
+    AIPromptTemplate,
+    AIWorkflow,
+    AIWorkflowExecution,
+    AITool,
+    AIToolExecution,
+    AIJob,
+    AIJobHistory,
+    AIReasoningLog,
+    AIContext,
+    AISession,
+    AIUsage,
+    AITokenUsage,
+    AIAuditLog,
+)
+
+
 __all__ = [
     "User",
     "Company",
@@ -162,4 +189,27 @@ __all__ = [
     "Role",
     "Permission",
     "AuthToken",
+    "AIProvider",
+    "AIModel",
+    "AIConversation",
+    "AIConversationMessage",
+    "AIAgent",
+    "AIAgentConfiguration",
+    "AIAgentMemory",
+    "AIKnowledgeBase",
+    "AIKnowledgeDocument",
+    "AIEmbedding",
+    "AIPromptTemplate",
+    "AIWorkflow",
+    "AIWorkflowExecution",
+    "AITool",
+    "AIToolExecution",
+    "AIJob",
+    "AIJobHistory",
+    "AIReasoningLog",
+    "AIContext",
+    "AISession",
+    "AIUsage",
+    "AITokenUsage",
+    "AIAuditLog"
 ]
