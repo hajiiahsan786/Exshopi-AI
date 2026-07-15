@@ -13,6 +13,7 @@ from app.api.v1.endpoints import (
     opportunities,
     activities,
     tasks,
+    notifications,
     roles,
     permissions,
     inventory,
@@ -21,6 +22,7 @@ from app.api.v1.endpoints import (
 )
 
 api_router = APIRouter()
+api_router.include_router(notifications.router, prefix="/notifications", tags=["Notifications"])
 
 
 # Authentication
