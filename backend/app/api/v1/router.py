@@ -18,6 +18,7 @@ from app.api.v1.endpoints import (
     inventory,
     sales,
     finance,
+    manufacturing,
 )
 
 api_router = APIRouter()
@@ -117,6 +118,13 @@ for router, prefix, tags in inventory.INVENTORY_ROUTERS:
     api_router.include_router(
         router,
         prefix=prefix,
+        tags=tags,
+    )
+
+for router, prefix, tags in manufacturing.MANUFACTURING_ROUTERS:
+    api_router.include_router(
+        router,
+        prefix=f"/manufacturing{prefix}",
         tags=tags,
     )
 
