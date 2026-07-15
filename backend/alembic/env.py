@@ -24,6 +24,9 @@ import app.models  # noqa: E402, F401
 # Tell Alembic about your models
 target_metadata = Base.metadata
 
+from app.core.settings import settings
+config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+
 
 def run_migrations_offline() -> None:
     """Run migrations in offline mode."""
