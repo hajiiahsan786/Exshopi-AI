@@ -1,5 +1,29 @@
 from .user import User
 from .company import Company
+from .procurement import (
+    SupplierCategory,
+    SupplierContact,
+    SupplierAddress,
+    SupplierBankingInfo,
+    SupplierDocument,
+    SupplierRating,
+    SupplierPerformance,
+    PurchaseRequest,
+    PurchaseRequestItem,
+    PurchaseRequestApproval,
+    RFQ,
+    RFQItem,
+    RFQSupplier,
+    RFQResponseItem,
+    PurchaseOrder,
+    PurchaseOrderItem,
+    PurchaseOrderApproval,
+    GoodsReceiptNote,
+    GoodsReceiptItem,
+    PurchaseReturn,
+    PurchaseReturnItem,
+    SupplierPayment,
+)
 from .organization import Organization
 from .department import Department
 from .employee import Employee
@@ -79,9 +103,92 @@ from .finance import (
     VendorBill,
     VendorCreditNote,
 )
+from .manufacturing import (
+    BillOfMaterials,
+    BOMItem,
+    CapacityPlanning,
+    FinishedGoodsReceipt,
+    Machine,
+    MachineMaintenance,
+    ManufacturingOrder,
+    MaterialConsumption,
+    MaterialReservation,
+    ProductionBatch,
+    ProductionCost,
+    ProductionForecast,
+    ProductionSchedule,
+    QualityCheckpoint,
+    QualityInspection,
+    ReworkOrder,
+    Routing,
+    RoutingStep,
+    ScrapRecord,
+    WorkCenter,
+    WorkCenterCalendar,
+    WorkOrder,
+)
 from .role import Role
 from .permission import Permission
 from .auth_token import AuthToken
+from .notification import (
+    Notification,
+    NotificationCategory,
+    NotificationTemplate,
+    NotificationPreference,
+    NotificationDelivery,
+    NotificationChannel,
+    EmailMessage,
+    EmailTemplate,
+    EmailQueue,
+    EmailAttachment,
+    SMSMessage,
+    SMSTemplate,
+    SMSQueue,
+    WhatsAppMessage,
+    WhatsAppTemplate,
+    WhatsAppQueue,
+    PushNotification,
+    PushSubscription,
+    InAppNotification,
+    Announcement,
+    Broadcast,
+    Reminder,
+    ReminderSchedule,
+    UserNotification,
+    NotificationAuditLog,
+)
+
+from .document import (
+    Document,
+    DocumentCategory,
+    DocumentFolder,
+    FolderPermission,
+    DocumentVersion,
+    DocumentRevision,
+    DocumentMetadata,
+    DocumentTag,
+    DocumentComment,
+    DocumentAttachment,
+    DocumentShare,
+    DocumentPermission,
+    ApprovalWorkflow,
+    ApprovalStep,
+    ApprovalHistory,
+    ElectronicSignature,
+    SignatureRequest,
+    SignatureHistory,
+    OCRJob,
+    OCRResult,
+    DocumentTemplate,
+    MergeTemplate,
+    GeneratedDocument,
+    Archive,
+    ArchivePolicy,
+    RetentionPolicy,
+    Trash,
+    RestoreHistory,
+    DocumentAuditLog,
+)
 
 from .ai import (
     AIProvider,
@@ -111,6 +218,30 @@ from .ai import (
 
 
 __all__ = [
+    "KnowledgeSpace",
+    "KnowledgeCollection",
+    "KnowledgeFolder",
+    "KnowledgeDocument",
+    "KnowledgeChunk",
+    "EmbeddingModel",
+    "Embedding",
+    "VectorIndex",
+    "RetrievalJob",
+    "RetrievalHistory",
+    "MemoryProfile",
+    "LongTermMemory",
+    "ShortTermMemory",
+    "EpisodicMemory",
+    "SemanticMemory",
+    "WorkingMemory",
+    "MemorySnapshot",
+    "MemoryRelationship",
+    "KnowledgeTag",
+    "KnowledgeCategory",
+    "KnowledgeSource",
+    "KnowledgeVersion",
+    "KnowledgePermission",
+    "KnowledgeAuditLog",
     "User",
     "Company",
     "Organization",
@@ -186,6 +317,28 @@ __all__ = [
     "TaxRate",
     "VendorBill",
     "VendorCreditNote",
+    "BillOfMaterials",
+    "BOMItem",
+    "CapacityPlanning",
+    "FinishedGoodsReceipt",
+    "Machine",
+    "MachineMaintenance",
+    "ManufacturingOrder",
+    "MaterialConsumption",
+    "MaterialReservation",
+    "ProductionBatch",
+    "ProductionCost",
+    "ProductionForecast",
+    "ProductionSchedule",
+    "QualityCheckpoint",
+    "QualityInspection",
+    "ReworkOrder",
+    "Routing",
+    "RoutingStep",
+    "ScrapRecord",
+    "WorkCenter",
+    "WorkCenterCalendar",
+    "WorkOrder",
     "Role",
     "Permission",
     "AuthToken",
@@ -213,3 +366,64 @@ __all__ = [
     "AITokenUsage",
     "AIAuditLog"
 ]
+
+from .workflow import (
+    WorkflowCategory,
+    Workflow,
+    WorkflowVersion,
+    WorkflowStep,
+)
+
+__all__.extend([
+    "WorkflowCategory",
+    "Workflow",
+    "WorkflowVersion",
+    "WorkflowStep",
+])
+from .workflow import (
+    WorkflowTransition,
+    WorkflowCondition,
+    WorkflowAction,
+    WorkflowTrigger,
+)
+
+__all__.extend([
+    "WorkflowTransition",
+    "WorkflowCondition",
+    "WorkflowAction",
+    "WorkflowTrigger",
+])
+from .workflow import (
+    WorkflowExecution,
+    WorkflowExecutionLog,
+    WorkflowTask,
+    WorkflowApproval,
+    WorkflowApprover,
+    WorkflowApprovalHistory,
+)
+
+__all__.extend([
+    "WorkflowExecution",
+    "WorkflowExecutionLog",
+    "WorkflowTask",
+    "WorkflowApproval",
+    "WorkflowApprover",
+    "WorkflowApprovalHistory",
+])
+from .workflow import (
+    WorkflowSchedule,
+    WorkflowTimer,
+    WorkflowVariable,
+    WorkflowTemplate,
+    WorkflowNotification,
+    WorkflowAuditLog,
+)
+
+__all__.extend([
+    "WorkflowSchedule",
+    "WorkflowTimer",
+    "WorkflowVariable",
+    "WorkflowTemplate",
+    "WorkflowNotification",
+    "WorkflowAuditLog",
+])

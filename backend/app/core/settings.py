@@ -9,9 +9,9 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     DEBUG: bool = True
 
-    DATABASE_URL: str
+    DATABASE_URL: str = "sqlite:///:memory:"
 
-    SECRET_KEY: str
+    SECRET_KEY: str = "test"
 
     ALGORITHM: str = "HS256"
 
