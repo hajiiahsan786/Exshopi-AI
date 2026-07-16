@@ -1,8 +1,4 @@
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-.coverage
-htmlcov/
 .env
+__pycache__/
+*.py[cod]
+*$py.class

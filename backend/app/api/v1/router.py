@@ -21,7 +21,7 @@ from app.api.v1.endpoints import (
     inventory,
     sales,
     finance,
-    manufacturing,
+    ai,
 )
 
 api_router = APIRouter()
@@ -154,9 +154,9 @@ for router, prefix, tags in finance.FINANCE_ROUTERS:
         tags=tags,
     )
 
-# Workflows
-from app.api.v1.endpoints import workflows
+# AI
 api_router.include_router(
-    workflows.router,
-    prefix="/workflows",
+    ai.router,
+    prefix="/ai",
+    tags=["AI"],
 )
