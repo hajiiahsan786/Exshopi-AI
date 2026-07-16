@@ -114,7 +114,7 @@ const setLocalStorage = (key: string, value: any) => {
 };
 
 export const useStore = create<AppState>((set) => ({
-  theme: getLocalStorage("ex_theme", "dark") as AppState["theme"],
+  theme: getLocalStorage("ex_theme", "light") as AppState["theme"],
   radius: getLocalStorage("ex_radius", "lg") as AppState["radius"],
   spacing: getLocalStorage("ex_spacing", "comfortable") as AppState["spacing"],
   fontFamily: getLocalStorage("ex_fontFamily", "sans") as AppState["fontFamily"],
