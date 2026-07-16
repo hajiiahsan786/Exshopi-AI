@@ -1,6 +1,8 @@
+from app.api.v1.endpoints.document import router as document_router
 from fastapi import APIRouter
 
 from app.api.v1.endpoints import (
+    agent,
     auth,
     users,
     organizations,
@@ -13,6 +15,7 @@ from app.api.v1.endpoints import (
     opportunities,
     activities,
     tasks,
+    notifications,
     roles,
     permissions,
     inventory,
@@ -22,6 +25,7 @@ from app.api.v1.endpoints import (
 )
 
 api_router = APIRouter()
+api_router.include_router(notifications.router, prefix="/notifications", tags=["Notifications"])
 
 
 # Authentication
@@ -114,7 +118,15 @@ api_router.include_router(
     tags=["Permissions"],
 )
 
+
+api_router.include_router(
+    agent.router,
+    prefix="/agents",
+    tags=["Agents"],
+)
+
 for router, prefix, tags in inventory.INVENTORY_ROUTERS:
+
     api_router.include_router(
         router,
         prefix=prefix,
@@ -141,3 +153,10 @@ for router, prefix, tags in finance.FINANCE_ROUTERS:
         prefix=prefix,
         tags=tags,
     )
+
+# Workflows
+from app.api.v1.endpoints import workflows
+api_router.include_router(
+    workflows.router,
+    prefix="/workflows",
+)
