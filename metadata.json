@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Exshopi-AI",
+  "description": "Imported from GitHub: hajiiahsan786/Exshopi-AI",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
