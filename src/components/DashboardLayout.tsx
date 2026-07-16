@@ -376,7 +376,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onLogout }) =>
               animate={{ width: 260, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 220 }}
-              className="border-r border-zinc-800/80 bg-zinc-900/60 backdrop-blur-md flex flex-col flex-shrink-0 z-30"
+              className="border-r border-white/30 bg-white/50 backdrop-blur-2xl flex flex-col flex-shrink-0 z-30"
             >
               {/* Sidebar Header Brand */}
               <div className="p-5 border-b border-zinc-800 flex items-center justify-between">
@@ -443,283 +443,151 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onLogout }) =>
               </div>
 
               {/* Sidebar Menu Items */}
-              <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
-                <span className="text-[10px] font-bold text-zinc-600 px-2 uppercase tracking-wider block mb-2">Workspace Portals</span>
+              <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+                <span className="text-[10px] font-bold text-zinc-500 px-2 uppercase tracking-wider block mb-3">Enterprise OS</span>
                 
                 <button
                   onClick={() => setActiveView("dashboard")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
                     activeView === "dashboard"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
                   }`}
                 >
                   <LayoutGrid className="h-4 w-4" />
-                  <span>Dashboard Control</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("ai-workforce")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "ai-workforce"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Brain className="h-4 w-4 text-indigo-400" />
-                  <span>AI Headquarters</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("voice-ai")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "voice-ai"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Mic className="h-4 w-4 text-emerald-400" />
-                  <span>Voice AI Platform</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("crm")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "crm"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Briefcase className="h-4 w-4" />
-                  <span>Enterprise CRM</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("hr")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "hr"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Users className="h-4 w-4" />
-                  <span>Enterprise HR & Workforce</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("procurement")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "procurement"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <ShoppingCart className="h-4 w-4" />
-                  <span>Enterprise Procurement</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("manufacturing")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "manufacturing"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Factory className="h-4 w-4" />
-                  <span>Enterprise Manufacturing</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("inventory")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "inventory"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Boxes className="h-4 w-4" />
-                  <span>Enterprise Inventory</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("logistics")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "logistics"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Truck className="h-4 w-4 text-indigo-400" />
-                  <span>Logistics & Fleet</span>
+                  <span>Workspace</span>
                 </button>
 
                 <button
                   onClick={() => setActiveView("sales")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
                     activeView === "sales"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
                   }`}
                 >
-                  <DollarSign className="h-4 w-4" />
-                  <span>Sales OMS Ledger</span>
+                  <TrendingUp className="h-4 w-4" />
+                  <span>Sales</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveView("crm")}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
+                    activeView === "crm"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
+                  }`}
+                >
+                  <Briefcase className="h-4 w-4" />
+                  <span>CRM</span>
                 </button>
 
                 <button
                   onClick={() => setActiveView("finance")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
                     activeView === "finance"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
                   }`}
                 >
-                  <Wallet className="h-4 w-4" />
-                  <span>Enterprise Finance</span>
+                  <Coins className="h-4 w-4" />
+                  <span>Finance</span>
                 </button>
 
                 <button
-                  onClick={() => setActiveView("marketplace")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "marketplace"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
+                  onClick={() => setActiveView("inventory")}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
+                    activeView === "inventory"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
                   }`}
                 >
-                  <Store className="h-4 w-4 text-indigo-400" />
-                  <span>Enterprise Marketplace</span>
+                  <Boxes className="h-4 w-4" />
+                  <span>Inventory</span>
                 </button>
 
                 <button
-                  onClick={() => setActiveView("payments")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "payments"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
+                  onClick={() => setActiveView("manufacturing")}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
+                    activeView === "manufacturing"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
                   }`}
                 >
-                  <CreditCard className="h-4 w-4 text-emerald-400" />
-                  <span>Enterprise Payments</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("projects")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "projects"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <FolderKanban className="h-4 w-4" />
-                  <span>Percy Scrum Projects</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("support")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "support"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <LifeBuoy className="h-4 w-4" />
-                  <span>Enterprise Support</span>
+                  <Factory className="h-4 w-4" />
+                  <span>Manufacturing</span>
                 </button>
 
                 <button
                   onClick={() => setActiveView("marketing")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
                     activeView === "marketing"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
                   }`}
                 >
                   <Megaphone className="h-4 w-4" />
-                  <span>Marketing Automation</span>
+                  <span>Marketing</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveView("hr")}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
+                    activeView === "hr"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
+                  }`}
+                >
+                  <Users className="h-4 w-4" />
+                  <span>HR</span>
                 </button>
 
                 <button
                   onClick={() => setActiveView("documents")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
                     activeView === "documents"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
                   }`}
                 >
                   <FileText className="h-4 w-4" />
-                  <span>Enterprise Documents</span>
+                  <span>Documents</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveView("ai-workforce")}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
+                    activeView === "ai-workforce"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
+                  }`}
+                >
+                  <Brain className="h-4 w-4" />
+                  <span>AI Agents</span>
                 </button>
 
                 <button
                   onClick={() => setActiveView("workflows")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
                     activeView === "workflows"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
                   }`}
                 >
-                  <Compass className="h-4 w-4" />
-                  <span>Visual Workflow Builder</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("design-system")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "design-system"
-                      ? `${getAccentClass("bg")} text-white shadow-md`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Sparkles className="h-4 w-4" />
-                  <span>Design Sandbox</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("analytics")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "analytics"
-                      ? `${getAccentClass("bg")} text-white shadow-md`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <TrendingUp className="h-4 w-4" />
-                  <span>BI & Advanced Analytics</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("notifications")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "notifications"
-                      ? `${getAccentClass("bg")} text-white shadow-md shadow-indigo-500/5`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Bell className="h-4 w-4" />
-                  <span>Notification Center</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveView("security")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
-                    activeView === "security"
-                      ? `${getAccentClass("bg")} text-white shadow-md`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
-                  }`}
-                >
-                  <Cpu className="h-4 w-4" />
-                  <span>Enterprise Security</span>
+                  <Activity className="h-4 w-4" />
+                  <span>Automation</span>
                 </button>
 
                 <button
                   onClick={() => setActiveView("settings")}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs rounded-lg font-medium cursor-pointer transition-all ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs rounded-xl font-medium cursor-pointer hover:bg-white/40 hover:scale-[1.02] transition-all shadow-sm ${
                     activeView === "settings"
-                      ? `${getAccentClass("bg")} text-white shadow-md`
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-950/40"
+                      ? `bg-white/60 text-indigo-600 shadow-md border border-white/50`
+                      : "text-zinc-600 border border-transparent"
                   }`}
                 >
-                  <Sliders className="h-4 w-4" />
-                  <span>Admin & Settings</span>
+                  <Sun className="h-4 w-4" />
+                  <span>Settings</span>
                 </button>
               </nav>
 

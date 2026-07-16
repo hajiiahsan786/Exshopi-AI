@@ -623,7 +623,7 @@ export const AnalyticsCharts: React.FC = () => {
                       <ResponsiveContainer width="100%" height="100%">
                         {/* WIDGET 1: Payments Area Flow */}
                         {widgetId === "payments-area" && (
-                          <AreaChart data={getFilteredPaymentsData()} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                          <AreaChart data={paymentsData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                             <defs>
                               <linearGradient id="stripeCaptured" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="5%" stopColor={activeAccentColor} stopOpacity={0.25} />
@@ -889,7 +889,7 @@ export const AnalyticsCharts: React.FC = () => {
               <div className="h-[500px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   {fullscreenWidget === "payments-area" ? (
-                    <AreaChart data={getFilteredPaymentsData()} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <AreaChart data={paymentsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                       <defs>
                         <linearGradient id="stripeCapturedF" x1="0" y1="0" x2="0" y2="1">
                           <stop offset="5%" stopColor={activeAccentColor} stopOpacity={0.25} />

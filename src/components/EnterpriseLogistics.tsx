@@ -574,15 +574,26 @@ Based on current active fleet assets, we analyzed **${shipmentsList.length} acti
   };
 
   // Recharts fake mockup time series for charts based on real data length
-  const volumeData = [
-    { name: "Mon", Shipments: Math.max(5, shipmentsList.length * 0.7), Delay: 1 },
-    { name: "Tue", Shipments: Math.max(8, shipmentsList.length * 0.9), Delay: 0 },
-    { name: "Wed", Shipments: Math.max(12, shipmentsList.length * 1.2), Delay: 2 },
-    { name: "Thu", Shipments: Math.max(10, shipmentsList.length * 1.1), Delay: 1 },
-    { name: "Fri", Shipments: Math.max(15, shipmentsList.length * 1.5), Delay: 3 },
-    { name: "Sat", Shipments: Math.max(7, shipmentsList.length * 0.6), Delay: 0 },
-    { name: "Sun", Shipments: Math.max(9, shipmentsList.length * 0.8), Delay: 1 }
-  ];
+
+  const [loading, setLoading] = useState(true);
+  const [volumeData, setVolumeData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVolumeData([
+        { name: "Mon", Shipments: Math.max(5, shipmentsList.length * 0.7), Delay: 1 },
+        { name: "Tue", Shipments: Math.max(8, shipmentsList.length * 0.9), Delay: 0 },
+        { name: "Wed", Shipments: Math.max(12, shipmentsList.length * 1.2), Delay: 2 },
+        { name: "Thu", Shipments: Math.max(10, shipmentsList.length * 1.1), Delay: 1 },
+        { name: "Fri", Shipments: Math.max(15, shipmentsList.length * 1.5), Delay: 3 },
+        { name: "Sat", Shipments: Math.max(6, shipmentsList.length * 0.5), Delay: 0 },
+        { name: "Sun", Shipments: Math.max(4, shipmentsList.length * 0.4), Delay: 0 }
+      ]);
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [shipmentsList.length]);
+
 
   const pieData = [
     { name: "In Transit", value: metrics.inProgress || 3, color: "#6366f1" },
@@ -700,8 +711,8 @@ Based on current active fleet assets, we analyzed **${shipmentsList.length} acti
                       <p className="text-3xs text-zinc-500">Weekly logistics fulfillment velocity mapped across networks</p>
                     </div>
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={volumeData}>
+                      {loading ? <div className="w-full h-full bg-slate-200/50 animate-pulse rounded-xl" /> : <ResponsiveContainer width="100%" height="100%">
+<AreaChart data={volumeData}>
                           <defs>
                             <linearGradient id="colorShip" x1="0" y1="0" x2="0" y2="1">
                               <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
@@ -713,7 +724,7 @@ Based on current active fleet assets, we analyzed **${shipmentsList.length} acti
                           <ChartTooltip contentStyle={{ backgroundColor: "#18181b", borderColor: "#27272a" }} labelStyle={{ color: "#a1a1aa" }} />
                           <Area type="monotone" dataKey="Shipments" stroke="#6366f1" strokeWidth={2} fillOpacity={1} fill="url(#colorShip)" />
                         </AreaChart>
-                      </ResponsiveContainer>
+</ResponsiveContainer>}
                     </div>
                   </Card>
 

@@ -664,730 +664,241 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({ onSuccess }) => {
 
             {/* 2. Register Mode (9-Step Premium Onboarding Wizard) */}
             {mode === "register" && (
-              <div className="space-y-5">
+              <div className="space-y-6">
                 {/* Stepper Header */}
-                <div className="border-b border-zinc-800/80 pb-3">
-                  <div className="flex justify-between items-center text-xs mb-2">
-                    <span className="font-bold text-zinc-400 uppercase tracking-wider text-3xs">
+                <div className="border-b border-zinc-200 pb-4">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="font-bold text-zinc-500 uppercase tracking-wider text-xs">
                       Enterprise AI Workspace Creator
                     </span>
-                    <Badge variant="neutral" className={`${getAccentClass("text")} border-zinc-800 font-bold`}>
-                      Step {onboardStep} of 8
+                    <Badge variant="accent" className="font-bold bg-indigo-100 text-indigo-700 border-indigo-200">
+                      Step {onboardStep} of 4
                     </Badge>
                   </div>
                   {/* Progress bar */}
-                  <div className="flex gap-1.5">
-                    {Array.from({ length: 8 }).map((_, idx) => (
+                  <div className="flex gap-2">
+                    {Array.from({ length: 4 }).map((_, idx) => (
                       <div
                         key={idx}
-                        className={`h-1 flex-1 rounded-full transition-all duration-300 ${
+                        className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
                           idx + 1 <= onboardStep
-                            ? getAccentClass("bg")
-                            : "bg-zinc-800/60"
+                            ? "bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.5)]"
+                            : "bg-zinc-200"
                         }`}
                       />
                     ))}
                   </div>
-                  <h3 className="text-sm font-bold text-zinc-100 mt-2.5">
-                    {onboardStep === 1 && "1. Corporate Identity & Base Country"}
-                    {onboardStep === 2 && "2. Lead Administrator Credentials"}
-                    {onboardStep === 3 && "3. Security Dual-Factor Authorization"}
-                    {onboardStep === 4 && "4. Localized Settlement & Clock Profile"}
-                    {onboardStep === 5 && "5. Workforce Organizers & Seat Invites"}
-                    {onboardStep === 6 && "6. Secure Document Hub & OCR Node"}
-                    {onboardStep === 7 && "7. Workspace Operational Licensing"}
-                    {onboardStep === 8 && "8. Spawning Workspace container..."}
+                  <h3 className="text-lg font-bold text-zinc-800 mt-4 tracking-tight">
+                    {onboardStep === 1 && "1. Company Information"}
+                    {onboardStep === 2 && "2. Business Details"}
+                    {onboardStep === 3 && "3. Upload Documents"}
+                    {onboardStep === 4 && "4. AI Workspace Setup"}
                   </h3>
                 </div>
 
                 {errorMsg && (
-                  <div className="p-3 bg-rose-950/30 border border-rose-900/30 rounded-xl text-xs text-rose-400 text-center">
+                  <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-sm font-medium text-rose-600 text-center shadow-sm">
                     {errorMsg}
                   </div>
                 )}
 
-                {/* Step 1: Corporate Identity & Base Country */}
+                {/* Step 1: Company Information */}
                 {onboardStep === 1 && (
-                  <div className="space-y-4">
+                  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
                     <Input
-                      label="Company Legal / Trading Name"
-                      placeholder="Exshopi Labs International"
+                      label="Company Name"
+                      placeholder="e.g. Exshopi Labs International"
                       required
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      icon={<Building className="h-4 w-4 text-zinc-500" />}
+                      icon={<Building className="h-5 w-5 text-zinc-400" />}
                     />
 
-                    <div className="flex flex-col gap-1.5">
-                      <span className="text-2xs font-bold text-zinc-400 uppercase tracking-wider">Base Incorporation Country</span>
+                    <div className="flex flex-col gap-2">
+                      <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Company Logo (Optional)</span>
+                      <div className="border-2 border-dashed border-zinc-300 rounded-2xl p-6 flex flex-col items-center justify-center bg-zinc-50/50 hover:bg-zinc-100/50 transition-colors cursor-pointer">
+                        <UploadCloud className="h-8 w-8 text-zinc-400 mb-2" />
+                        <span className="text-sm font-medium text-zinc-600">Drag & drop logo here or click to browse</span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Country</span>
                       <select
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
-                        className="w-full bg-zinc-950 border border-zinc-800/80 rounded-xl px-3 py-2 text-xs text-zinc-200 focus:outline-none focus:border-zinc-700/80"
+                        className="w-full bg-white border border-zinc-200 rounded-2xl px-4 py-3 text-sm text-zinc-700 shadow-sm focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all"
                       >
                         <option>United Arab Emirates</option>
                         <option>United States</option>
-                        <option>Singapore</option>
                         <option>United Kingdom</option>
+                        <option>Singapore</option>
                       </select>
                     </div>
 
-                    {/* Specialized UAE / Dubai Trade License Preloads */}
-                    {country === "United Arab Emirates" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="p-3.5 bg-indigo-950/20 border border-indigo-900/30 rounded-xl space-y-3"
-                      >
-                        <div className="flex items-start gap-2.5">
-                          <Info className="h-4 w-4 text-indigo-400 shrink-0 mt-0.5" />
-                          <p className="text-[10px] text-zinc-400 leading-normal">
-                            **UAE localized registration** triggers automatic Dubai economy TRN formatting and preloads AED currency settling indexes.
-                          </p>
-                        </div>
-                        <Input
-                          label="Dubai DED Commercial Trade License Number"
-                          placeholder="TL-90821"
-                          required
-                          value={tradeLicenseNumber}
-                          onChange={(e) => setTradeLicenseNumber(e.target.value)}
-                          icon={<ShieldCheck className="h-4 w-4 text-indigo-400" />}
-                        />
-                      </motion.div>
-                    )}
-
-                    <div className="grid grid-cols-2 gap-3">
-                      <Input
-                        label="Corporate URL Domain"
-                        placeholder="https://exshopi.ai"
-                        value={website}
-                        onChange={(e) => setWebsite(e.target.value)}
-                        icon={<Globe className="h-4 w-4 text-zinc-500" />}
-                      />
-                      <Input
-                        label="Support Line Phone"
-                        placeholder="+971 4 555 1234"
-                        value={companyPhone}
-                        onChange={(e) => setCompanyPhone(e.target.value)}
-                        icon={<Phone className="h-4 w-4 text-zinc-500" />}
-                      />
-                    </div>
-
-                    <div className="pt-2 flex justify-between items-center">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setMode("login");
-                          setErrorMsg("");
-                        }}
-                        className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
-                      >
-                        Cancel to Log In
-                      </button>
-                      <Button
-                        variant="primary"
-                        onClick={() => {
-                          if (!companyName.trim()) {
-                            setErrorMsg("Legal corporate name is required to initialize workspace.");
-                            return;
-                          }
-                          setErrorMsg("");
-                          setOnboardStep(2);
-                        }}
-                        className="flex items-center gap-1"
-                      >
-                        <span>Configure Owner Profile</span>
-                        <ArrowRight className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
+                    <Button variant="primary" className="w-full h-12 text-sm mt-4 rounded-2xl" onClick={() => {
+                      if (!companyName.trim()) {
+                        setErrorMsg("Company name is required.");
+                        return;
+                      }
+                      setErrorMsg("");
+                      setOnboardStep(2);
+                    }}>
+                      Continue to Business Details <ArrowRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  </motion.div>
                 )}
 
-                {/* Step 2: Owner Profile */}
+                {/* Step 2: Business Details */}
                 {onboardStep === 2 && (
-                  <div className="space-y-4">
-                    <Input
-                      label="Full Administrator Legal Name"
-                      placeholder="Ahsan Haji"
-                      required
-                      value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
-                      icon={<User className="h-4 w-4 text-zinc-500" />}
-                    />
-                    <Input
-                      label="Administrative Security Email"
-                      placeholder="hajiiahsan786@gmail.com"
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      icon={<Mail className="h-4 w-4 text-zinc-500" />}
-                    />
-                    <Input
-                      label="Administrative Contact Phone"
-                      placeholder="+971 50 123 4567"
-                      required
-                      value={ownerPhone}
-                      onChange={(e) => setOwnerPhone(e.target.value)}
-                      icon={<Phone className="h-4 w-4 text-zinc-500" />}
-                    />
-                    <Input
-                      label="Select Security Password"
-                      placeholder="••••••••"
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      icon={<Lock className="h-4 w-4 text-zinc-500" />}
-                    />
-                    <div className="pt-2 flex gap-3">
-                      <Button
-                        variant="secondary"
-                        onClick={() => setOnboardStep(1)}
-                        className="flex-1"
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() => {
-                          if (!fullName.trim() || !email.trim() || !ownerPhone.trim() || !password.trim()) {
-                            setErrorMsg("All administrator details are required.");
-                            return;
-                          }
-                          setErrorMsg("");
-                          setOnboardStep(3);
-                        }}
-                        className="flex-1 flex justify-center items-center gap-1"
-                      >
-                        <span>Request Security Codes</span>
-                        <ArrowRight className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 3: SMS and Email Dual Verification */}
-                {onboardStep === 3 && (
-                  <div className="space-y-4">
-                    <div className="p-3.5 bg-zinc-950/50 border border-zinc-800/80 rounded-xl text-center space-y-2">
-                      <p className="text-2xs text-zinc-400">Cryptographic dual-factor tokens dispatched to security coordinates:</p>
-                      <div className="flex flex-wrap justify-center gap-1.5">
-                        <Badge variant="accent" className="font-mono text-3xs">{email}</Badge>
-                        <Badge variant="accent" className="font-mono text-3xs">{ownerPhone}</Badge>
-                      </div>
-                      <div className="pt-2 text-3xs text-zinc-500 font-mono flex justify-center gap-3 border-t border-zinc-900/50 mt-1.5">
-                        <span>Email code: <span className={getAccentClass("text")}>123456</span></span>
-                        <span>SMS code: <span className={getAccentClass("text")}>654321</span></span>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3">
-                      <Input
-                        label="6-Digit Email OTP"
-                        placeholder="123456"
-                        required
-                        maxLength={6}
-                        value={emailVerifyCode}
-                        onChange={(e) => setEmailVerifyCode(e.target.value.replace(/\D/g, ""))}
-                        icon={<ShieldCheck className="h-4 w-4 text-zinc-500" />}
-                      />
-                      <Input
-                        label="6-Digit SMS OTP"
-                        placeholder="654321"
-                        required
-                        maxLength={6}
-                        value={phoneVerifyCode}
-                        onChange={(e) => setPhoneVerifyCode(e.target.value.replace(/\D/g, ""))}
-                        icon={<ShieldCheck className="h-4 w-4 text-zinc-500" />}
-                      />
-                    </div>
-
-                    <div className="pt-2 flex gap-3">
-                      <Button
-                        variant="secondary"
-                        onClick={() => setOnboardStep(2)}
-                        className="flex-1"
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() => {
-                          if (emailVerifyCode !== "123456" || phoneVerifyCode !== "654321") {
-                            setErrorMsg("Verification code mismatch. Please review coordinate coordinates.");
-                            return;
-                          }
-                          setErrorMsg("");
-                          setOnboardStep(4);
-                        }}
-                        className="flex-1 flex justify-center items-center gap-1"
-                      >
-                        <span>Verify Identity</span>
-                        <ArrowRight className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 4: Localized Operational Settings */}
-                {onboardStep === 4 && (
-                  <div className="space-y-4 text-xs">
-                    <div className="p-3 bg-zinc-950/40 border border-zinc-800/50 rounded-xl">
-                      <span className="text-3xs font-bold text-zinc-500 uppercase tracking-widest block mb-1">Preloaded Regional Settings</span>
-                      <p className="text-[11px] text-zinc-400">Settings resolved automatically from incorporative coordinates. Adjust below as desired.</p>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="flex flex-col gap-1.5">
-                        <span className="font-semibold text-zinc-400">Timezone Node</span>
-                        <select
-                          value={timezone}
-                          onChange={(e) => setTimezone(e.target.value)}
-                          className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-3 py-2 text-zinc-200 focus:outline-none focus:border-zinc-700"
-                        >
-                          <option>Asia/Dubai</option>
-                          <option>America/Los_Angeles</option>
-                          <option>America/New_York</option>
-                          <option>Europe/London</option>
-                          <option>Asia/Singapore</option>
+                  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex flex-col gap-2">
+                        <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Business Type</span>
+                        <select className="w-full bg-white border border-zinc-200 rounded-2xl px-4 py-3 text-sm text-zinc-700 shadow-sm focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all">
+                          <option>LLC (Limited Liability Company)</option>
+                          <option>Freezone Company</option>
+                          <option>Sole Proprietorship</option>
+                          <option>Public Joint Stock</option>
                         </select>
                       </div>
-
-                      <div className="flex flex-col gap-1.5">
-                        <span className="font-semibold text-zinc-400">Ledger Currency</span>
-                        <select
-                          value={currency}
-                          onChange={(e) => setCurrency(e.target.value)}
-                          className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-3 py-2 text-zinc-200 focus:outline-none focus:border-zinc-700"
-                        >
-                          <option>AED (United Arab Emirates Dirham)</option>
-                          <option>USD ($)</option>
-                          <option>EUR (€)</option>
-                          <option>SGD (S$)</option>
-                          <option>GBP (£)</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="flex flex-col gap-1.5">
-                        <span className="font-semibold text-zinc-400">Interface Language</span>
-                        <select
-                          value={language}
-                          onChange={(e) => setLanguage(e.target.value)}
-                          className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-3 py-2 text-zinc-200 focus:outline-none focus:border-zinc-700"
-                        >
-                          <option>English (Arabic Dual)</option>
-                          <option>English</option>
-                          <option>Spanish</option>
-                          <option>German</option>
-                          <option>Chinese</option>
-                        </select>
-                      </div>
-
-                      <div className="flex flex-col gap-1.5">
-                        <span className="font-semibold text-zinc-400">Core Industry</span>
-                        <select
-                          value={industry}
-                          onChange={(e) => setIndustry(e.target.value)}
-                          className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-3 py-2 text-zinc-200 focus:outline-none focus:border-zinc-700"
-                        >
-                          <option>Artificial Intelligence</option>
-                          <option>E-Commerce</option>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Industry</span>
+                        <select className="w-full bg-white border border-zinc-200 rounded-2xl px-4 py-3 text-sm text-zinc-700 shadow-sm focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all">
+                          <option>Technology & Software</option>
+                          <option>E-Commerce & Retail</option>
                           <option>Logistics & Supply Chain</option>
-                          <option>Enterprise Software</option>
+                          <option>Manufacturing</option>
+                          <option>Healthcare</option>
                         </select>
                       </div>
                     </div>
 
-                    <div className="pt-2 flex gap-3">
-                      <Button
-                        variant="secondary"
-                        onClick={() => setOnboardStep(3)}
-                        className="flex-1"
-                      >
+                    <div className="flex flex-col gap-2">
+                      <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Employees</span>
+                      <select className="w-full bg-white border border-zinc-200 rounded-2xl px-4 py-3 text-sm text-zinc-700 shadow-sm focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all">
+                        <option>1-10 Employees</option>
+                        <option>11-50 Employees</option>
+                        <option>51-200 Employees</option>
+                        <option>201-500 Employees</option>
+                        <option>500+ Employees</option>
+                      </select>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex flex-col gap-2">
+                        <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Currency</span>
+                        <select className="w-full bg-white border border-zinc-200 rounded-2xl px-4 py-3 text-sm text-zinc-700 shadow-sm focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all">
+                          <option>AED (Dirham)</option>
+                          <option>USD (Dollar)</option>
+                          <option>EUR (Euro)</option>
+                          <option>GBP (Pound)</option>
+                        </select>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Timezone</span>
+                        <select className="w-full bg-white border border-zinc-200 rounded-2xl px-4 py-3 text-sm text-zinc-700 shadow-sm focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all">
+                          <option>Asia/Dubai (GST +04:00)</option>
+                          <option>America/New_York (EST -05:00)</option>
+                          <option>Europe/London (GMT +00:00)</option>
+                          <option>Asia/Singapore (SGT +08:00)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between mt-4">
+                      <Button variant="ghost" className="h-12 text-sm rounded-2xl" onClick={() => setOnboardStep(1)}>
                         Back
                       </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() => setOnboardStep(5)}
-                        className="flex-1 flex justify-center items-center gap-1"
-                      >
-                        <span>Workspace Structure</span>
-                        <ArrowRight className="h-3 w-3" />
+                      <Button variant="primary" className="h-12 px-8 text-sm rounded-2xl" onClick={() => setOnboardStep(3)}>
+                        Continue <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
 
-                {/* Step 5: Workforce Departments & Teams */}
-                {onboardStep === 5 && (
-                  <div className="space-y-4 text-xs">
-                    <div className="flex flex-col gap-1.5">
-                      <span className="font-bold text-zinc-400 uppercase tracking-wider text-3xs">
-                        Configure Core Operational Departments
-                      </span>
-                      <div className="max-h-32 overflow-y-auto space-y-1.5 bg-zinc-950/40 p-2.5 border border-zinc-850 rounded-xl custom-scrollbar">
-                        {departmentsList.map((dept, index) => (
-                          <div
-                            key={index}
-                            className="flex justify-between items-center p-2 bg-zinc-950 rounded-lg border border-zinc-850/80"
-                          >
-                            <span className="text-zinc-300 font-medium">{dept}</span>
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setDepartmentsList(
-                                  departmentsList.filter((_, i) => i !== index)
-                                )
-                              }
-                              className="text-rose-500 hover:text-rose-400 hover:bg-rose-950/20 p-1 rounded-md transition-colors"
-                            >
-                              <Trash2 className="h-3.5 w-3.5" />
-                            </button>
+                {/* Step 3: Documents */}
+                {onboardStep === 3 && (
+                  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
+                    <p className="text-xs text-zinc-500 mb-2">Upload the following required documents. Our AI will automatically verify and extract information using OCR.</p>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {["Trade License", "VAT Certificate", "Passport", "Emirates ID", "National ID", "Certificates"].map((doc) => (
+                        <div key={doc} className="flex items-center gap-3 p-3 border border-zinc-200 rounded-xl bg-white shadow-sm">
+                          <div className="h-8 w-8 rounded-lg bg-zinc-100 flex items-center justify-center flex-shrink-0">
+                            <FileText className="h-4 w-4 text-zinc-400" />
                           </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Add department */}
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        placeholder="Add Custom Department (e.g. Sales, Accounting)"
-                        value={newDeptInput}
-                        onChange={(e) => setNewDeptInput(e.target.value)}
-                        className="flex-1 bg-zinc-950 border border-zinc-850 text-2xs text-zinc-200 placeholder-zinc-600 rounded-lg py-1.5 px-3 focus:outline-none focus:border-zinc-700"
-                      />
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => {
-                          if (!newDeptInput.trim()) return;
-                          setDepartmentsList([...departmentsList, newDeptInput.trim()]);
-                          setNewDeptInput("");
-                        }}
-                      >
-                        <Plus className="h-3.5 w-3.5" />
-                      </Button>
-                    </div>
-
-                    <div className="flex flex-col gap-1.5">
-                      <span className="font-semibold text-zinc-400">Invite Colleagues (Optional, Comma-Separated)</span>
-                      <textarea
-                        placeholder="coo@company.com, advisor@company.com"
-                        rows={2}
-                        value={invitedEmails}
-                        onChange={(e) => setInvitedEmails(e.target.value)}
-                        className="w-full bg-zinc-950 border border-zinc-850 rounded-xl p-2.5 text-zinc-300 placeholder-zinc-600 focus:outline-none focus:border-zinc-700 text-2xs"
-                      />
-                    </div>
-
-                    <div className="pt-2 flex gap-3">
-                      <Button
-                        variant="secondary"
-                        onClick={() => setOnboardStep(4)}
-                        className="flex-1"
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() => setOnboardStep(6)}
-                        className="flex-1 flex justify-center items-center gap-1"
-                      >
-                        <span>Document Vault</span>
-                        <ArrowRight className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 6: Secure Document Vault & OCR Simulation */}
-                {onboardStep === 6 && (
-                  <div className="space-y-4">
-                    <div className="p-3 bg-indigo-950/10 border border-indigo-900/20 rounded-xl flex items-center gap-2.5">
-                      <ShieldCheck className="h-4.5 w-4.5 text-indigo-400 shrink-0" />
-                      <p className="text-[10px] text-zinc-400 leading-normal">
-                        **Exshopi KYC Standards** require upload of incorporative credentials. Live OCR Scan nodes will extract license particulars.
-                      </p>
-                    </div>
-
-                    {/* Upload grid buttons */}
-                    <div className="grid grid-cols-3 gap-2.5 text-3xs font-mono">
-                      {/* Trade License */}
-                      <button
-                        type="button"
-                        onClick={() => handleSimulatedUpload("trade_license")}
-                        disabled={!!uploadingDocType}
-                        className={`p-3 border rounded-xl flex flex-col items-center gap-1.5 justify-center transition-all ${
-                          uploadedDocs.some(d => d.documentType === "trade_license")
-                            ? "border-emerald-500/30 bg-emerald-950/10 text-emerald-400"
-                            : "border-zinc-850 bg-zinc-950/40 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-950"
-                        }`}
-                      >
-                        <UploadCloud className="h-4 w-4" />
-                        <span>TRADE LICENSE</span>
-                        {uploadedDocs.some(d => d.documentType === "trade_license") && (
-                          <Badge variant="success" className="text-[9px] px-1 py-0.5 mt-0.5">VERIFIED</Badge>
-                        )}
-                      </button>
-
-                      {/* VAT Certificate */}
-                      <button
-                        type="button"
-                        onClick={() => handleSimulatedUpload("vat_certificate")}
-                        disabled={!!uploadingDocType}
-                        className={`p-3 border rounded-xl flex flex-col items-center gap-1.5 justify-center transition-all ${
-                          uploadedDocs.some(d => d.documentType === "vat_certificate")
-                            ? "border-emerald-500/30 bg-emerald-950/10 text-emerald-400"
-                            : "border-zinc-850 bg-zinc-950/40 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-950"
-                        }`}
-                      >
-                        <UploadCloud className="h-4 w-4" />
-                        <span>VAT DOCUMENT</span>
-                        {uploadedDocs.some(d => d.documentType === "vat_certificate") && (
-                          <Badge variant="success" className="text-[9px] px-1 py-0.5 mt-0.5">VERIFIED</Badge>
-                        )}
-                      </button>
-
-                      {/* Passport Copy */}
-                      <button
-                        type="button"
-                        onClick={() => handleSimulatedUpload("passport_copy")}
-                        disabled={!!uploadingDocType}
-                        className={`p-3 border rounded-xl flex flex-col items-center gap-1.5 justify-center transition-all ${
-                          uploadedDocs.some(d => d.documentType === "passport_copy")
-                            ? "border-emerald-500/30 bg-emerald-950/10 text-emerald-400"
-                            : "border-zinc-850 bg-zinc-950/40 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-950"
-                        }`}
-                      >
-                        <UploadCloud className="h-4 w-4" />
-                        <span>PASSPORT SCAN</span>
-                        {uploadedDocs.some(d => d.documentType === "passport_copy") && (
-                          <Badge variant="success" className="text-[9px] px-1 py-0.5 mt-0.5">VERIFIED</Badge>
-                        )}
-                      </button>
-                    </div>
-
-                    {/* Progress indicator */}
-                    {uploadingDocType && (
-                      <div className="space-y-1.5 bg-zinc-950/50 p-3 border border-zinc-850 rounded-xl font-mono text-[10px]">
-                        <div className="flex justify-between text-zinc-400">
-                          <span className="flex items-center gap-1">
-                            <RefreshCw className="h-3 w-3 animate-spin text-indigo-400" />
-                            <span>Uploading & Scanning {uploadingDocType.replace("_", " ")}...</span>
-                          </span>
-                          <span>{uploadProgress}%</span>
-                        </div>
-                        <div className="h-1 bg-zinc-900 rounded-full overflow-hidden">
-                          <div className="h-full bg-indigo-500 transition-all duration-200" style={{ width: `${uploadProgress}%` }} />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Active uploaded document list with preview/delete capability */}
-                    {uploadedDocs.length > 0 && (
-                      <div className="space-y-1.5">
-                        <span className="text-3xs font-bold text-zinc-500 uppercase tracking-widest block">Active Cloud Vault Files</span>
-                        <div className="space-y-1.5 max-h-32 overflow-y-auto custom-scrollbar">
-                          {uploadedDocs.map((doc) => (
-                            <div key={doc.id} className="flex justify-between items-center p-2.5 bg-zinc-950 rounded-xl border border-zinc-850/60 text-2xs">
-                              <div className="flex items-center gap-2">
-                                <FileText className="h-4 w-4 text-indigo-400 shrink-0" />
-                                <div className="text-left">
-                                  <div className="text-zinc-200 font-medium truncate max-w-[200px]">{doc.name}</div>
-                                  <div className="text-zinc-500 text-3xs">{doc.size} • {doc.documentType.toUpperCase()}</div>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-1.5">
-                                <Button
-                                  variant="secondary"
-                                  size="sm"
-                                  onClick={() => setPreviewDoc(doc)}
-                                  icon={<Eye className="h-3.5 w-3.5" />}
-                                />
-                                <button
-                                  type="button"
-                                  onClick={() => handleDeleteDocument(doc.id)}
-                                  className="p-1.5 text-rose-500 hover:text-rose-400 hover:bg-rose-950/20 rounded-md transition-colors"
-                                >
-                                  <Trash2 className="h-3.5 w-3.5" />
-                                </button>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* OCR Output Terminal Log */}
-                    {ocrLogs.length > 0 && (
-                      <div className="p-3 bg-black border border-zinc-850/80 rounded-xl font-mono text-[9px] h-24 overflow-y-auto custom-scrollbar text-indigo-400">
-                        <div className="text-zinc-500 border-b border-zinc-900 pb-1 mb-1 font-bold uppercase text-[8px]">OCR scan telemetry logs</div>
-                        {ocrLogs.map((log, i) => (
-                          <div key={i} className="flex gap-1 items-start">
-                            <span>{log}</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-semibold text-zinc-700 truncate">{doc}</p>
+                            <p className="text-[10px] text-zinc-400">Required</p>
                           </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="pt-2 flex gap-3">
-                      <Button
-                        variant="secondary"
-                        onClick={() => setOnboardStep(5)}
-                        className="flex-1"
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() => {
-                          if (uploadedDocs.length < 1) {
-                            setErrorMsg("Security index requires at least 1 verified business document scan.");
-                            return;
-                          }
-                          setErrorMsg("");
-                          setOnboardStep(7);
-                        }}
-                        className="flex-1 flex justify-center items-center gap-1"
-                      >
-                        <span>Workspace Tier</span>
-                        <ArrowRight className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 7: Workspace Licensing */}
-                {onboardStep === 7 && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-3 gap-2.5 text-xs">
-                      {/* Growth Plan */}
-                      <button
-                        type="button"
-                        onClick={() => setChosenPlan("Growth")}
-                        className={`p-3 rounded-2xl border text-left flex flex-col justify-between h-44 transition-all ${
-                          chosenPlan === "Growth"
-                            ? "bg-zinc-950 border-zinc-600 ring-1 ring-zinc-600"
-                            : "bg-zinc-950/30 border-zinc-850 hover:border-zinc-750"
-                        }`}
-                      >
-                        <div>
-                          <span className="text-3xs font-bold text-zinc-500 uppercase tracking-wider">
-                            Basic
-                          </span>
-                          <h4 className="font-bold text-zinc-100 text-xs mt-0.5">Growth</h4>
-                          <p className="text-zinc-500 text-[9px] mt-1.5 leading-snug">
-                            1 AI specialist, 3 core departments, manual trigger workspace.
-                          </p>
-                        </div>
-                        <div className="font-bold text-zinc-300 text-xs">$0 <span className="text-3xs text-zinc-600 font-normal">trial</span></div>
-                      </button>
-
-                      {/* Scale Plan */}
-                      <button
-                        type="button"
-                        onClick={() => setChosenPlan("Scale")}
-                        className={`relative p-3 rounded-2xl border text-left flex flex-col justify-between h-44 transition-all ${
-                          chosenPlan === "Scale"
-                            ? "bg-indigo-950/20 border-indigo-500 ring-1 ring-indigo-500"
-                            : "bg-zinc-950/30 border-zinc-850 hover:border-indigo-900/30"
-                        }`}
-                      >
-                        <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full shadow">
-                          RECOMMENDED
-                        </span>
-                        <div>
-                          <span className="text-3xs font-bold text-indigo-400 uppercase tracking-wider">
-                            Strategic
-                          </span>
-                          <h4 className="font-bold text-zinc-100 text-xs mt-0.5">Scale AI</h4>
-                          <p className="text-zinc-500 text-[9px] mt-1.5 leading-snug">
-                            Spawns Sophia AI CEO, autonomous specialists, custom budgets.
-                          </p>
-                        </div>
-                        <div className="font-bold text-indigo-300 text-xs">$250 <span className="text-3xs text-zinc-600 font-normal">/mo</span></div>
-                      </button>
-
-                      {/* Enterprise Plan */}
-                      <button
-                        type="button"
-                        onClick={() => setChosenPlan("Enterprise")}
-                        className={`p-3 rounded-2xl border text-left flex flex-col justify-between h-44 transition-all ${
-                          chosenPlan === "Enterprise"
-                            ? "bg-zinc-950 border-zinc-600 ring-1 ring-zinc-600"
-                            : "bg-zinc-950/30 border-zinc-850 hover:border-zinc-750"
-                        }`}
-                      >
-                        <div>
-                          <span className="text-3xs font-bold text-zinc-500 uppercase tracking-wider">
-                            PCI-DSS Group
-                          </span>
-                          <h4 className="font-bold text-zinc-100 text-xs mt-0.5">Enterprise</h4>
-                          <p className="text-zinc-500 text-[9px] mt-1.5 leading-snug">
-                            Dedicated VPS containers, HIPAA vault, unlimited AI cores.
-                          </p>
-                        </div>
-                        <div className="font-bold text-zinc-300 text-xs">$950 <span className="text-3xs text-zinc-600 font-normal">/mo</span></div>
-                      </button>
-                    </div>
-
-                    <div className="pt-2 flex gap-3">
-                      <Button
-                        variant="secondary"
-                        onClick={() => setOnboardStep(6)}
-                        className="flex-1"
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() => {
-                          setOnboardStep(8);
-                          handleOnboardingSubmit();
-                        }}
-                        className="flex-1 flex justify-center items-center gap-1.5 font-bold"
-                      >
-                        <Sparkles className="h-3.5 w-3.5 animate-pulse text-indigo-400" />
-                        <span>Provision Cockpit</span>
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 8: Terminal logs */}
-                {onboardStep === 8 && (
-                  <div className="space-y-4">
-                    <div className="p-4 bg-black border border-zinc-850 rounded-xl font-mono text-3xs space-y-2 h-56 overflow-y-auto custom-scrollbar shadow-inner text-green-400 text-left">
-                      <div className="flex items-center gap-2 text-zinc-400 border-b border-zinc-850 pb-1.5 mb-2">
-                        <span className="h-2.5 w-2.5 rounded-full bg-rose-500 animate-ping" />
-                        <span className="font-bold uppercase text-[8px]">PROVISIONING COCKPIT VM LOGS</span>
-                      </div>
-                      {onboardingLogs.map((log, idx) => (
-                        <div key={idx} className="flex gap-1.5 items-start">
-                          <ChevronRight className="h-3.5 w-3.5 shrink-0 text-zinc-500" />
-                          <span>{log}</span>
+                          <button className="h-6 w-6 rounded-md bg-indigo-50 text-indigo-600 flex items-center justify-center hover:bg-indigo-100">
+                            <Plus className="h-3 w-3" />
+                          </button>
                         </div>
                       ))}
-                      {loading && (
-                        <div className="flex items-center gap-2 text-zinc-500 italic mt-3 animate-pulse">
-                          <RefreshCw className="h-3 w-3 animate-spin text-zinc-500" />
-                          <span>Deploying autonomous cores...</span>
-                        </div>
-                      )}
                     </div>
-                    <div className="text-center text-3xs text-zinc-500 italic">
-                      Compiling environment ledger data. Please hold connection link alive.
+
+                    <div className="border-2 border-dashed border-indigo-200 rounded-2xl p-8 flex flex-col items-center justify-center bg-indigo-50/30 hover:bg-indigo-50/60 transition-colors cursor-pointer mt-4">
+                      <UploadCloud className="h-10 w-10 text-indigo-400 mb-3" />
+                      <span className="text-sm font-semibold text-indigo-700 mb-1">Drag & Drop all documents here</span>
+                      <span className="text-xs text-indigo-400/80">Support for PDF, JPG, PNG up to 10MB each</span>
                     </div>
-                  </div>
+
+                    <div className="flex justify-between mt-4">
+                      <Button variant="ghost" className="h-12 text-sm rounded-2xl" onClick={() => setOnboardStep(2)}>
+                        Back
+                      </Button>
+                      <Button variant="primary" className="h-12 px-8 text-sm rounded-2xl" onClick={() => setOnboardStep(4)}>
+                        Verify & Continue <CheckCircle2 className="h-4 w-4 ml-2" />
+                      </Button>
+                    </div>
+                  </motion.div>
                 )}
+
+                {/* Step 4: AI Workspace */}
+                {onboardStep === 4 && (
+                  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
+
+                    <div className="p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100 shadow-sm">
+                      <div className="flex items-center gap-3 mb-3">
+                        <Sparkles className="h-5 w-5 text-indigo-500" />
+                        <h4 className="font-semibold text-zinc-800 text-sm">Deploy Autonomous AI Employees</h4>
+                      </div>
+                      <p className="text-xs text-zinc-600 mb-4">Select which departments should be fully automated by Exshopi AI agents.</p>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        {["Sales AI (Outbound)", "Finance AI (Reconciliation)", "HR AI (Recruiting)", "Logistics AI (Tracking)", "Marketing AI (Campaigns)", "Customer Support AI"].map((ai) => (
+                          <label key={ai} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-indigo-100 cursor-pointer shadow-sm hover:shadow-md transition-shadow">
+                            <input type="checkbox" defaultChecked className="w-4 h-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500" />
+                            <span className="text-xs font-medium text-zinc-700">{ai}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Primary Company Goal</span>
+                      <Input
+                        placeholder="e.g. Increase revenue by 20% in Q3"
+                        icon={<TrendingUp className="h-4 w-4 text-zinc-400" />}
+                      />
+                    </div>
+
+                    <div className="flex justify-between mt-6">
+                      <Button variant="ghost" className="h-12 text-sm rounded-2xl" onClick={() => setOnboardStep(3)}>
+                        Back
+                      </Button>
+                      <Button variant="primary" loading={loading} className="h-12 px-8 text-sm rounded-2xl" onClick={handleRegister}>
+                        Launch AI Workspace <Sparkles className="h-4 w-4 ml-2" />
+                      </Button>
+                    </div>
+                  </motion.div>
+                )}
+
               </div>
             )}
 
-            {/* 3. 5-Minute AI Onboarding Configurator Mode (Post-registration setup!) */}
             {mode === "aiOnboarding" && (
               <div className="space-y-5">
                 <div className="text-center pb-2 border-b border-zinc-850/80">

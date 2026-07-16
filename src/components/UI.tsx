@@ -106,7 +106,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   let variantClass = "";
   if (variant === "primary") {
-    variantClass = `${getAccentClass("bg", true)} text-white shadow-lg shadow-indigo-500/10`;
+    variantClass = `bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:shadow-lg hover:shadow-indigo-500/25 hover:scale-[1.02] text-white border-none`;
   } else if (variant === "secondary") {
     variantClass = "bg-zinc-800 hover:bg-zinc-700 text-zinc-100 border border-zinc-700/50";
   } else if (variant === "outline") {
@@ -152,7 +152,7 @@ export const Card: React.FC<CardProps> = ({
 
   const baseStyle = "border bg-zinc-900/80 border-zinc-800/80 shadow-md";
   const glassStyle = glassmorphismEnabled && glass
-    ? "bg-zinc-900/30 backdrop-blur-md border-zinc-800/60 shadow-xl"
+    ? "bg-white/60 backdrop-blur-2xl border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
     : "bg-zinc-900 border-zinc-800";
 
   return (
