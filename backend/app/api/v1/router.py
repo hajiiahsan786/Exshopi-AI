@@ -18,6 +18,7 @@ from app.api.v1.endpoints import (
     inventory,
     sales,
     finance,
+    bi_router_factory,
 )
 
 api_router = APIRouter()
@@ -114,6 +115,13 @@ api_router.include_router(
 )
 
 for router, prefix, tags in inventory.INVENTORY_ROUTERS:
+    api_router.include_router(
+        router,
+        prefix=prefix,
+        tags=tags,
+    )
+
+for router, prefix, tags in bi_router_factory.BI_ROUTERS:
     api_router.include_router(
         router,
         prefix=prefix,
